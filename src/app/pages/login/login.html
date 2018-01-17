@@ -1,0 +1,25 @@
+<div class="card card-login mx-auto mt-5 login">
+  <div class="card-header">Login</div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="form-group" >
+        <label for="inputEmail">Email address</label>
+        <input [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}" [formControl]="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}" [formControl]="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> Remember Password</label>
+        </div>
+      </div>
+      <button [disabled]="!form.valid" type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+    <div class="text-center">
+      <a class="d-block small mt-3" href="">Register an Account</a>
+      <a class="d-block small" href="">Forgot Password?</a>
+    </div>
+  </div>

@@ -1,0 +1,133 @@
+<div class="container">
+    <br>
+        <h2>Flights</h2>
+        <hr>
+        <input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter flight by name'
+        (keyup)='updateFilter($event)'
+      />
+
+    <ngx-datatable #mydatatable class="material" [headerHeight]="50" [limit]="4" [columnMode]="'force'" [footerHeight]="30" [rowHeight]="'auto'"
+        [rows]="flights">
+        <ngx-datatable-column name="Id" maxWidth="50">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit">
+                    {{ value }}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Name" prop="nombre">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-nombre'] = true" *ngIf="!editing[rowIndex + '-nombre']">
+                    {{ value }}
+                </span>
+                <input autofocus (blur)="updateValue($event, 'nombre', rowIndex)" *ngIf="editing[rowIndex+ '-nombre']" type="text" [value]="value"
+                />
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dep date" prop="fechaSalida">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-fechaSalida'] = true" *ngIf="!editing[rowIndex + '-fechaSalida']">
+                    {{ value }}
+                </span>
+                <input ngbPopover="Date should be dd-mm-yyyy format" triggers="mouseenter:mouseleave"  placement="bottom"
+                autofocus (blur)="updateValue($event, 'fechaSalida', rowIndex)" *ngIf="editing[rowIndex+ '-fechaSalida']" type="text" [value]="value"
+                />
+                
+                
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dep hour" prop="horaSalida" maxWidth="80">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span title="Double click to edit" (dblclick)="editing[rowIndex + '-horaSalida'] = true" *ngIf="!editing[rowIndex + '-horaSalida']">
+                        {{ value }}
+                    </span>
+                    <input ngbPopover="Hour should be HH:mm format" triggers="mouseenter:mouseleave"  placement="bottom"
+                    autofocus (blur)="updateValue($event, 'horaSalida', rowIndex)" *ngIf="editing[rowIndex+ '-horaSalida']" type="text" [value]="value"
+                    />
+                    
+                    
+                </ng-template>
+            </ngx-datatable-column>
+        <ngx-datatable-column name="Arr date" prop="fechaLlegada">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-fechaLlegada'] = true" *ngIf="!editing[rowIndex + '-fechaLlegada']">
+                    {{ value }}
+                </span>
+                <input ngbPopover="Date should be dd-mm-yyyy format" triggers="mouseenter:mouseleave"  placement="bottom"
+                autofocus (blur)="updateValue($event, 'fechaLlegada', rowIndex)" *ngIf="editing[rowIndex+ '-fechaLlegada']" type="text" [value]="value"
+                />
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Arr hour" prop="horaLlegada" maxWidth="70" >
+                <ng-template ngx-datatable-cell-template  let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <span title="Double click to edit" (dblclick)="editing[rowIndex + '-horaLlegada'] = true" *ngIf="!editing[rowIndex + '-horaLlegada']">
+                        {{ value }}
+                    </span>
+                    <input ngbPopover="Hour should be HH:mm format" triggers="mouseenter:mouseleave"  placement="bottom"
+                    autofocus (blur)="updateValue($event, 'horaLlegada', rowIndex)" *ngIf="editing[rowIndex+ '-horaLlegada']" type="text" [value]="value"
+                    />
+                    
+                    
+                </ng-template>
+            </ngx-datatable-column>
+        <ngx-datatable-column name="State" prop="estado">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                <span [ngClass]="value" title="Double click to edit" (dblclick)="editing[rowIndex + '-estado'] = true" *ngIf="!editing[rowIndex + '-estado']">
+                    {{ value }}
+                </span>
+                <select *ngIf="editing[rowIndex + '-estado']" (change)="updateValue($event, 'estado', rowIndex)" [value]="value">
+                    <option value="listo">listo</option>
+                    <option value="embarcando">embarcando</option>
+                    <option value="en_hora">en hora</option>
+                    <option value="cancelado">cancelado</option>
+                    <option value="retrasado">retrasado</option>
+                </select>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="From" prop="trayecto.origen">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span>
+                    {{ value }}
+                </span>
+
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="To" prop="trayecto.destino">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span>
+                    {{ value }}
+                </span>
+
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Seats" prop="numAsientos" maxWidth="50">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                        <span>
+                            {{ value }}
+                        </span>
+                    </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="  €" prop="precioBaseTurista" maxWidth="70">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-precioBaseTurista'] = true" *ngIf="!editing[rowIndex + '-precioBaseTurista']">
+                            {{ value }}
+                        </span>
+                        <input autofocus (blur)="updateValue($event, 'precioBaseTurista', rowIndex)" *ngIf="editing[rowIndex+ '-precioBaseTurista']" type="text" [value]="value"
+                        />
+                    </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="€ VIP" prop="precioBaseVip" maxWidth="70">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                        <span title="Double click to edit" (dblclick)="editing[rowIndex + '-precioBaseVip'] = true" *ngIf="!editing[rowIndex + '-precioBaseVip']">
+                            {{ value }}
+                        </span>
+                        <input autofocus (blur)="updateValue($event, 'precioBaseVip', rowIndex)" *ngIf="editing[rowIndex+ '-precioBaseVip']" type="text" [value]="value"
+                        />
+                    </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div>

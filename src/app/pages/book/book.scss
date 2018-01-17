@@ -1,0 +1,113 @@
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.modal-open {
+    overflow: scroll;
+}
+.row img{width:100%;
+height:190px}
+.bg-grey {
+    background-color: #f2f2f2;
+}
+img {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+a {
+    color : red;
+}
+a:hover {
+    color : brown;
+}
+.price {
+    float:right;
+    font-size:40px;
+}
+.listing-number{
+   width: 100%;
+}
+.listing-number li {
+   display: inline-block;
+   list-style-type: none;
+   overflow: hidden;
+   position: relative;
+   width: 33%;
+   float: left;
+   color: #636363;
+  }
+.listing-enquiry-sec {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.listing-enquiry-sec ul {
+   padding:0pt;
+   
+    
+}
+.listing-enquiry-sec ul li {
+    margin: 0in;
+    float: left;
+    display: inline-block;
+    line-height: 18pt;
+    color: #343c42;
+    font-weight: 400;
+    list-style-type: none;
+    width: 100%;
+    box-sizing: border-box;
+    
+}
+.listing-enquiry-sec ul li a {
+        margin-right: .052083333in;
+        color: #3e4c56;
+        padding: 3.75pt;
+        text-align: center;
+        font-weight: 600;
+        border-radius: .020833333in;
+        margin-left: 3pt;
+        margin-right: 3pt;
+        margin-top: 3pt;
+        margin-bottom: 5pt;
+        box-sizing: border-box;
+        display: block;
+        text-align: center;
+        border-image: none;
+        border-color: #d6d1d1;
+        border-style: solid;
+        border-top-width: .75pt;
+        border-bottom-width: .75pt;
+        border-left-width: 1pt;
+        border-right-width: .75pt;
+        outline: none;
+        transition: all .5s ease;
+}
+.listing-enquiry-sec ul li a:hover {
+        color: red;
+        list-style-type: none;
+}
+
+.listing-title h3 {
+    font-size: 1.5pc;
+    padding-top: .3125pc;
+    padding-bottom: 6pt;
+    color: #000;
+    font-weight: 700;
+    
+}
+
+.item-listing {
+    margin-top:15px;
+    background-color : #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    transition: box-shadow .25s;
+}
+.grow :hover{ transform: scale(1.05); }
+@media screen and ( min-width: 600px ) {
+  
+  .listing-enquiry-sec ul li {
+    width: 25%;
+}
+}
+

@@ -1,0 +1,110 @@
+<div class="container">
+    <br>
+    <h2>¡Book a flight right now!</h2>
+    <hr>
+    <div class="item-listing bg-grey" *ngFor=" let flight of flights">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ images[flight.trayecto.destino] }}" alt="">
+                </div>
+                <div class="col-md-8 listing-title ">
+                    <div class="price">
+                        <i *ngIf="!showVip[flight.id]">{{ flight.precioBaseTurista }} €</i>
+                        <i *ngIf="showVip[flight.id]">{{ flight.precioBaseVip }} € VIP</i>
+                    </div>
+
+                    <h3>{{ flight.nombre }}</h3>
+                    <h4>From
+                        <strong>{{ flight.trayecto.origen }}</strong> to
+                        <strong>{{ flight.trayecto.destino }}</strong>
+                    </h4>
+                    <p>
+                        <div class="listing-number ">
+                            <ul>
+                                <li>
+
+                                    Departure:
+                                </li>
+                                <li>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ flight.fechaSalida }}</li>
+                                <li>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> {{ flight.horaSalida }}</li>
+                            </ul>
+                        </div>
+                        <div class="listing-number ">
+                            <ul>
+                                <li>
+                                    Arrival:
+                                </li>
+                                <li>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ flight.fechaLlegada }}</li>
+                                <li>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> {{ flight.horaLlegada }}</li>
+                            </ul>
+                        </div>
+                        <div class="listing-enquiry-sec">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0)" *ngIf="!showVip[flight.id]" (click)="showVip[flight.id]=true">
+                                        <i class="fa fa-star-o" aria-hidden="true"></i> See VIP price</a>
+                                    <a href="javascript:void(0)" *ngIf="showVip[flight.id]" (click)="showVip[flight.id]=false">
+                                        <i class="fa fa-money" aria-hidden="true"></i> See normal price</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="open(content,flight)">
+                                        <i class="fa fa-credit-card" aria-hidden="true"></i> Book it</a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" (click)="putAlert('Sorry','This feature is not available','warning')">
+                                        <i class="fa fa-usd" aria-hidden="true"></i> Get discount</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Your booking</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Flight data:
+            <i>{{ flight.nombre }}, {{ flight.trayecto.origen }} - {{ flight.trayecto.destino }}</i>
+        </p>
+        <form [formGroup]="form" (ngSubmit)="onSubmit();" novalidate>
+
+            <div class="form-group">
+                <label class="form-control-label" for="email">Email</label>
+                <input formControlName="email" type="text" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="idnumber">ID Number</label>
+                <input formControlName="dni" type="text" class="form-control" id="idnumber">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="username">Complete Name</label>
+                <input formControlName="nombre" type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="fechaNac">Birthday date</label>
+                <input formControlName="fechaNac" type="date" class="form-control" id="fechaNac">
+            </div>
+            <div class="form-group">
+                    <label for="happy" class="form-control-label">Category</label><br>
+                    <input type="radio" formControlName="price" value="{{flight.precioBaseTurista}}" > Normal: {{ flight.precioBaseTurista }} €
+                    <input type="radio" formControlName="price" value="{{flight.precioBaseVip}}"> Vip: {{ flight.precioBaseVip }} €
+                </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Book it</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

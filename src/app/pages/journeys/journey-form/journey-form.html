@@ -1,0 +1,26 @@
+
+<div class="card card-login mx-auto mt-5 login">
+    <div class="card-header">{{ title }}</div>
+    
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group" >
+          <label for="id">Id</label>
+          <input formControlName="id" type="number" class="form-control" id="id" placeholder="Id">
+        </div>
+        <div class="form-group">
+          <label class="center-block">From</label>
+            <select class="form-control" formControlName="from">
+                <option *ngFor="let a of airports" [value]="a">{{ a }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label class="center-block">To</label>
+            <select class="form-control" formControlName="to">
+                <option *ngFor="let a of airports" [value]="a">{{ a }}</option>
+            </select>
+          
+        </div>
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary btn-block">{{ title }}</button>
+      </form>
+    </div>

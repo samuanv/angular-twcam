@@ -1,0 +1,32 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+
+            <h2>Journeys</h2>
+            <hr>
+            <button (click)="journey=null" type="submit" class="btn btn-primary ">Add journey</button>
+
+            <ul class="list-group scroll">
+                <li class="list-group-item grow" *ngFor="let f of journeys" (click)="journey=f">
+                    <div class="child"> From
+                        <i>
+                            <strong> {{ f.origen }}</strong>
+                        </i> to
+                        <i>
+                            <strong>{{ f.destino }}</strong>
+                        </i>
+                        <span class="pull-right hidebutton">
+                            <i class="fa fa-fw fa-edit"></i>
+                        </span>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6" *ngIf="journey!==undefined">
+            <journey-form [journey]="journey" (save)="updateView($event)"></journey-form>
+
+        </div>
+    </div>
+</div>

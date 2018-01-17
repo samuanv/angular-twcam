@@ -1,0 +1,31 @@
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+input {
+    width:100%
+}
+select {
+    width:100%
+}
+.embarcando {
+    color:darkgoldenrod;
+}
+.listo {
+    color:darkgreen;
+}
+.sin_embarcar {
+    color:darkorange;
+}
+.cancelado {
+    color: darkred
+}
+.retrasado {
+    color:darkred;
+}
+.editing {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+
